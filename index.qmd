@@ -1,0 +1,62 @@
+# Preface {.unnumbered}
+
+Imagine a **grid covering the entire globe** where every cell has a **unique ID that tells you both its location and size** (the latter is constant at a given resolution). That's essentially what a Discrete Global Grid System (DGGS) is—**a table of the Earth's surface**. This makes **spatial analysis as simple as database operations**.
+
+
+![Transformation from a traditional projected coordinate system grid to a Discrete Global Grid System (DGGS)](files/figures/epsg_dggs.png)
+
+## The problem with traditional approaches
+Traditional coordinate systems introduce distortions in area, shape, or distance. Hierarchical, zone-based DGGS framework reduces these geographic biases.
+
+### Global Studies
+
+Traditional approaches for global analysis create fundamental problems:
+
+**Projection trade-offs**: Equal-area projections (like Mollweide) preserve area but distort shapes, while conformal projections preserve angles but distort areas. You can't have both properties globally.
+
+**Geographic grid distortions**: If you use lat/lon grids (like 5'x5' in ETOPO5 global elevation data), cell areas vary dramatically between the equator and the poles. A 5'x5' cell covers ~85km² (9.3km x 9.3km) at the equator but only ~42km² at 60°N (9.3km x 9.3km x cos60°). This makes area-based statistics unreliable—population density calculations will be systematically biased, with northern regions appearing more densely populated simply because their grid cells are smaller.
+
+**Multi-projection complexity**: Global datasets often use different projections (Web Mercator for web maps, Mollweide for climate data). Combining them requires constant reprojection, creating edge effects and potential data loss.
+
+**Non-uniform distortions**: When you combine data from different projections, you get inconsistent distortions that bias your results.
+
+
+### Regional Studies
+
+Even for regional studies, traditional approaches have limitations:
+
+**Multi-CRS complexity**: When your study area crosses country boundaries, you need multiple local coordinate systems, making seamless analysis difficult. For example, a Baltic Sea study using Estonian (EPSG:3301), Finnish (EPSG:3067), and Swedish (EPSG:3006) data requires constant reprojection, creating edge effects and potential data loss at boundaries. Simple operations like "find all cells within 10km of the coast" become complex multi-step processes.
+
+**Shape distortions in geographic grids**: Square lat/lon cells become rectangles at higher latitudes and have different distances to its neighbors in different directions. This creates directional bias in e.g. flow routing. The D8 algorithm will preferentially route the flow along the axis which *seems* steeper, not according to the actual topography.
+
+
+## The DGGS Solution
+
+**Discrete Global Grid System (DGGS)** is a modern geospatial framework that divides the Earth's surface into distinct, non-overlapping areas known as zones (or cells). These zones are commonly shaped as  hexagons, triangles, or squares, and together they provide a seamless coverage of the planet's surface. Each zone is geo-referenced and indexed, enabling efficient storage, retrieval and analysis of spatial data.
+
+DGGS provides a **seamless, hierarchical framework** where:
+
+- Each cell has **equal area** (fair statistics without bias)
+- Each cell has **consistent shape** (uniform neighborhoods for analysis)
+- **One global system** replaces dozens of coordinate systems
+- **Simple cell IDs** replace complex coordinate transformations
+
+**Area matters**: Equal-area cells make statistics fair. If cells have different sizes, simple averages are biased toward larger cells. DGGS ensures **area-unbiased analysis** without constant re-weighting.
+
+**Shape matters**: Consistent cell shapes (especially hexagons) provide **uniform neighborhoods**—every cell has the same number of neighbors in the same spatial relationship. This is crucial for **flow routing and spatial modelling** where direction matters.
+
+**Global integration**: One seamless framework replaces dozens of coordinate systems. You do analysis in **index space**—no repeated reprojections, just cell IDs.
+
+**Hierarchical structure**: DGGS grids have hierarchical structure, meaning that zones can be subdivided into smaller, self-similar units. This enables seamless scaling across spatial resolutions, making it adaptable for multi-resolution analysis.
+
+
+
+
+
+
+
+
+
+
+
+

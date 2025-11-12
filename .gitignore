@@ -205,3 +205,222 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   For a library or package, you might want to ignore these files since the code is
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   https://pdm.fming.dev/#use-with-ide
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+#   in version control.
+#   install all needed dependencies.
+#   intended to run in multiple environments; otherwise, check them in:
+#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  Usually these files are written by a python script from a template
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+# .python-version
+# Byte-compiled / optimized / DLL files
+# C extensions
+# Celery stuff
+# Cython debug symbols
+# Distribution / packaging
+# Django stuff:
+# Environments
+# Example code in package build process
+# Flask stuff:
+# History files
+# IPython
+# Installer logs
+# Jupyter Notebook
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+# Output files from R CMD build
+# Output files from R CMD check
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+# PyBuilder
+# PyCharm
+# PyInstaller
+# Pyre type checker
+# R Environment Variables
+# RStudio Connect folder
+# RStudio files
+# Rope project settings
+# SageMath parsed files
+# Scrapy stuff:
+# Session Data files
+# Sphinx documentation
+# Spyder project settings
+# Temporary files created by R markdown
+# Translations
+# Unit test / coverage reports
+# User-specific files
+# knitr and R markdown default cache directories
+# mkdocs documentation
+# mypy
+# pdm
+# pipenv
+# pkgdown site
+# poetry
+# produced vignettes
+# pyenv
+# pytype static type analyzer
+# translation temp files
+## Alex and Des Quarto Python book
+## try not to add HTML files
+#.idea/
+#Pipfile.lock
+#pdm.lock
+#poetry.lock
+
+
+
+## course info important gitignore
+
+Mapping1_files
+Mapping2_files
+Mapping3_files
+Turf_files
+
+
+
+
+*$py.class
+*-Ex.R
+*.Rproj
+*.cover
+*.egg
+*.egg-info/
+*.html
+*.knit.md
+*.log
+*.manifest
+*.mo
+*.pot
+*.py,cover
+*.py[cod]
+*.sage.py
+*.so
+*.spec
+*.utf8.md
+*_cache/
+.Python
+.RData
+.RDataTmp
+.Rapp.history
+.Renviron
+.Rhistory
+.Rproj.user/
+.Ruserdata
+.cache
+.coverage
+.coverage.*
+.dmypy.json
+.eggs/
+.env
+.httr-oauth
+.hypothesis/
+.installed.cfg
+.ipynb_checkpoints
+.mypy_cache/
+.nox/
+.pdm.toml
+.pybuilder/
+.pyre/
+.pytest_cache/
+.pytype/
+.quarto
+.ropeproject
+.scrapy
+.spyderproject
+.spyproject
+.tox/
+.venv
+.webassets-cache
+/*.Rcheck/
+/*.tar.gz
+/.quarto/
+/cache/
+/site
+ENV/
+MANIFEST
+R_01/*.md
+R_01/Intro.html
+R_01/Intro_files/
+R_02/*.md
+R_02/vector_analysis_1.html
+R_02/vector_analysis_1_files/
+R_03/*.md
+R_03/vector_analysis_2.html
+R_03/vector_analysis_2_files/
+R_04/*.md
+R_04/making_maps_files/
+R_04/map_making.html
+R_04/map_making_files/
+R_05/*.md
+R_05/raster_analysis.html
+R_05/raster_analysis_files/
+R_06/*.md
+R_06/spatial_interpolation.html
+R_06/spatial_interpolation_files/
+R_07/*.html
+R_07/*.md
+R_08/*.html
+R_08/*.md
+R_09/*.html
+R_09/*.md
+R_10/*.html
+R_10/*.md
+__pycache__/
+__pypackages__/
+_book/
+build/
+celerybeat-schedule
+celerybeat.pid
+cover/
+coverage.xml
+cython_debug/
+db.sqlite3
+db.sqlite3-journal
+develop-eggs/
+dist/
+dmypy.json
+docs/
+docs/_build/
+downloads/
+eggs/
+env.bak/
+env/
+htmlcov/
+instance/
+ipython_config.py
+lib/
+lib64/
+local_settings.py
+nosetests.xml
+parts/
+pip-delete-this-directory.txt
+pip-log.txt
+po/*~
+profile_default/
+rsconnect/
+sdist/
+share/python-wheels/
+site_libs
+target/
+var/
+venv.bak/
+venv/
+vignettes/*.html
+vignettes/*.pdf
+wheels/
+
+**/*.quarto_ipynb
+.DS_Store

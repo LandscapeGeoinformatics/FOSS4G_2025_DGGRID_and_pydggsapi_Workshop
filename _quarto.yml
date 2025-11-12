@@ -1,0 +1,32 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Hands-on DGGS and OGC DGGS-API with DGGRID and pydggsapi Workshop"
+  author: "Alexander Kmoch, Wai Tik Chan, Iris Luik, Kajetan Marcin Chrapkiewicz, Evelyn Uuemaa"
+  description: "This hands-on workshop walks through a full DGGS data pipeline. You'll use the FOSS tool DGGRID to index geospatial data and then publish it using pydggsapi, a new open-source server for the OGC API DGGS standard. Leave with a running web service on your laptop."
+  date: "11/12/2025"
+  sidebar:
+    logo: files/TYGI_b_logo_transp.png
+    search: true
+  chapters:
+    - index.qmd
+    - terminology/terminology.qmd
+    - dggs_grids/dggs_grids.qmd
+    - data_conversion/data_conversion.qmd
+    # - workshop/workshop.qmd
+    - references/references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: 
+      light: cosmo
+    toc-title: "On this page"
+    number-sections: false
+    code-overflow: scroll
+    toc-depth: 2
+jupyter: python3
+
