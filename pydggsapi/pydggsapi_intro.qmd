@@ -1,0 +1,1 @@
+# pydggsapi and OGC API - DGGS

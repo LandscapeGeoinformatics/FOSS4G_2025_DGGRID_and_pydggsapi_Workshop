@@ -22,9 +22,21 @@ book:
     - part: "Python Setup for the workshop"
       chapters:
         - pysetup/Installing_Micromamba.qmd
+        - pysetup/alt_install_miniconda.qmd
         - pysetup/Creating_environments.qmd
         - pysetup/test_installation.qmd
         - pysetup/Alternative_Miniconda.qmd
+        - pysetup/experimental_pixi.qmd
+    - part: "DGGRID and dggrid4py"
+      chapters:
+        - dggrid/dggrid_intro.qmd
+        # - dggrid_advanced/dggrid_advanced.qmd
+    
+    - part: "Pydggsapi and OGC API - DGGS"
+      chapters:
+        - pydggsapi/pydggsapi_intro.qmd
+        # - pydggsapi_advanced/pydggsapi_advanced.qmd
+    - references/license.qmd
     - references/references.qmd
 
 bibliography: references.bib
