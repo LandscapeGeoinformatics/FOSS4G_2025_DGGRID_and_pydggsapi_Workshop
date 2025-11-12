@@ -1,0 +1,137 @@
+# Python environments
+
+It is important to understand, that you are always `residing`
+somewhere in some folder. This will in particular important to make sure
+that you find your scripts, notebooks and the working data, which
+ideally reside under the same directory hierarchy.
+
+In order to be well organised throughout the course, please create a
+working folder/directory, where you will put your scripts and data files
+for the lab sessions and homeworks. On Windows you have your local user
+folder, typically `C:\Users\kmoch`. Open with the Windows File
+Explorer and create a new folder in this folder, with the name
+`geopython2025`.
+
+::: {.callout-warning}
+BEWARE:
+
+Make sure you navigate explicitly into your correct working folder
+`geopython2025`. As we will always start or environment from the
+command line, here are two very simple practical steps to navigate on
+the commandline.
+:::
+
+Open the `Powershell` command prompt from the Start menu or search bar, and type the
+commands shown below.
+
+```bash 
+c:
+cd C:\Users\kmoch\geopython2025
+```
+
+You can see which files are inside this folder by using the `dir`
+command. (On Mac and Linux it is `ls`) and it will print information and
+files of your current folder.
+
+``` bash 
+c:
+cd C:\Users\kmoch\geopython2025
+
+dir
+
+... output below
+
+Volume in drive C is Windows
+Volume Serial Number is 5E4C-FED5
+
+Directory of C:\Users\kmoch\geopython2025
+
+29.1.2025  15:00    <DIR>          .
+29.1.2025  15:00    <DIR>          ..
+```
+
+::: {.callout-note}
+`micromamba` basically represents a typical Python virtualenv command. You
+can create a several distinct environments, with different Python
+version, and with different packages to be installed. This will come in
+very handy to *try out* new libraries/packages/tools, without breaking
+you working installation. As mentioned before `micromamba` is just a smaller and faster *drop-in* replacement for `conda`.
+Almost all conda commands work exactly the same with micromamba. For some background on how to use the conda (and therefore micromamba) command, visit:
+
+<https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html>
+:::
+
+We want to use a modern, but reliable Python version 3.9, because some packages might not
+be fully available or tested in Python 3.10 or 3.11. Here it becomes obvious how
+practical virtual environments can be. They help you to keep various
+Python versions around without messing up your system, and at the same
+time, keep several working environments with different, possibly
+conflicting versions of different Python packages.
+
+There are two main ways of creating a `conda` environment.
+
+The more professional/reproducible way is to use a so called
+`environment.yml` file. In the file the environment name, the package
+channels, Python version and all desired packages are declared. This
+way, you should be able to install the same environment in different
+computers, therfore improving the reliability of having the same
+packages etc installed. You can even go so far as to specify the exact
+package version.
+
+Make sure you are using the correct folder on the University computers.
+In the Windows File Explorer, go via `this PC`, `c:\Users` to
+`your account name` folder.
+
+::: {.callout-tip}
+Now, please download the prepared
+[environment.yml](../files/data/environment.yml) file and save it to
+your newly created working folder. You might need to \"Right-click\" and
+use \"Save as\".
+:::
+
+To check, in the Powershell commandline window navigate to your
+working folder again and list the contents of the folder with `dir`:
+
+``` bash 
+(base) c:
+
+(base) cd C:\Users\kmoch\geopython2025
+
+(base) dir
+
+# ... output below
+
+
+# Volume in drive C is Windows
+# Volume Serial Number is 5E4C-FED5
+
+# Directory of C:\Users\kmoch\geopython2025
+
+# 29.1.2025  15:00    <DIR>          .
+# 29.1.2025  15:00    <DIR>          ..
+# 29.1.2025  08:51 AM            693 environment.yml
+```
+
+You should see the newly downloaded file in your folder. Now let\'s
+install the enviroment with conda:
+
+``` bash 
+(base) micromamba env create -f environment.yml
+```
+
+This will take some time. Eventually you should see something like this:
+
+``` bash
+
+Transaction finished.
+
+To activate this environment, use:
+
+    micromamba activate geopython2025
+```
+
+
+In the [next steps we will verify the installation and test that
+everything works](test_installation.html) in our new `geopython2025`
+conda Python environment and configure Jupyter Notebooks.
+

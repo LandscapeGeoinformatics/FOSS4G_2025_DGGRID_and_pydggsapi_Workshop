@@ -1,0 +1,137 @@
+# Installation of Python 
+
+**How to start doing GIS with Python on a computer?**
+
+Well, first you need to install Python and necessary Python modules that
+are used to perform various GIS-tasks. The purpose of this page is to
+help you out installing Python and all those modules into your own
+computer. Even though it is possible to install Python from their
+[homepage](https://www.python.org/), **we highly recommend using**
+modern Python environment management and package installation system based on [Conda-Forge](https://conda-forge.org/).
+
+Conda-Forge is a community-led collection of recipes, build infrastructure and distributions for the conda package management system.
+It is not a static distribution, but rather a continually updated set of packages, which provides open
+source distribution of the Python, R, and even Julia programming language packages for
+large-scale data processing, predictive analytics, and scientific
+computing, that aims to simplify package management and deployment. In
+short, it makes life much easier when installing new tools on your
+Python to play with.
+
+Conda-Forge is platform-agnostic and provides packages for Linux, macOS and Windows systems.
+These packages may be installed with the command `conda install PACKAGENAME` or `mamba install PACKAGENAME` (see below).
+
+There are nowadays 2-3 major ways to access the conda-forge ecosystem:
+
+- [Anaconda](https://www.anaconda.com/products/individual) is a full distribution of the conda-forge ecosystem, and includes Python, the conda package manager, and many other useful packages.
+- [Miniconda](https://docs.conda.io/en/latest/miniconda.html) is a smaller distribution that includes Python and the conda package manager and is quite light-weight.
+- [Micromamba](https://mamba.readthedocs.io/en/latest/) is a drop-in replacement for the conda package manager, but with much faster package installation speed.
+
+::: {.callout-important}
+In this course, we will use Micromamba to install our Python environment!
+
+But we will synonymously use the term `conda` environment to refer to the Python environments, be they managed with `micromamba`, `conda`, or `mamba`.
+:::
+
+
+## Windows
+
+To install the Micromamba utility, we will run a few lines of script in the Windows PowerShell. Earlier tutorials often show the use of the older `CMD` Windows commandline, the current versions of Windows Powershell are already good to work with.
+
+Please open the Windows PowerShell by typing `Powershell` in the "Search" field of the taskbar.
+
+You might get a warning when pasting into the command line window:
+
+[![](img/mamba_paste_anyway.png)]
+
+Copy, then paste and run the following commands:
+
+
+```powershell
+# Downloads the latest version of Micromamba
+Invoke-Webrequest -URI https://micro.mamba.pm/api/micromamba/win-64/latest -OutFile micromamba.tar.bz2
+
+# extracts the files to .\Library\bin
+tar xvf micromamba.tar.bz2
+
+# testing if tool works
+.\Library\bin\micromamba.exe --help
+```
+
+The above code downloads the latest version of Micromamba and extracts it to the current directory. The last line checks if was successful and should list the help information of the `micromamba` tool.
+
+::: {.callout-note}
+If something goes wrong at this stage, that means the extraction didn't work. You can try to extract the files manually by right-clicking on the `micromamba.tar.bz2` file and selecting `Extract All...` from the context menu. In the computer class (Windows 11) the extraction tools seem to be already on-board. On your private computers you might want to consider `7zip`.
+:::
+
+The next snippet will initialize the shell environment for the `micromamba` tool and sets the folder where the Python packages for your Python environments will be stored (e.g. `C:\Users\kmoch\micromamba`). This way, you can use and update your Python without needing administrator rights.
+
+```powershell
+# We use our own home folder e.g C:\Users\kmoch\micromamba as the so called base prefix
+$Env:MAMBA_ROOT_PREFIX="$($env:USERPROFILE)\micromamba"
+
+# initialize the shell, with the correct path to tool
+.\Library\bin\micromamba.exe shell init -s powershell "$($env:USERPROFILE)\micromamba"
+
+```
+
+There might be a query `Enter admin mode to enable long paths support?: [y/N]` which you can answer with `N` (no).
+
+The last snippet will add the `micromamba` tool to the `PATH` environment variable and place it under, e.g. `C:\Users\kmoch\Library\bin`. This will allow you to use `micromamba` directly from the commandline in the future.
+
+```powershell
+function Add-Path($Path) {
+    $Path = [Environment]::GetEnvironmentVariable("PATH", "User") + [IO.Path]::PathSeparator + $Path
+    [Environment]::SetEnvironmentVariable( "Path", $Path, "User" )
+}
+
+# and use micromamba directly
+Add-Path("$($env:USERPROFILE)\Library\bin")
+```
+
+Then close the Powershell Window and start a new Powershell - from now you should be able to just call `micromamba --help` from any folder.
+
+::: {.callout-note}
+If you get an error message that insinuates a `security exception` or something similar regarding a file `profile.ps1`, you might need to change the execution policy of your Powershell. This is a security feature of Windows, that prevents you from running scripts that you didn't write yourself. You can change the execution policy by running the following command in the Powershell:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+```
+
+If this doesnt't work, you might try with a more relaxing policy:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+```
+:::
+
+## MacOS or Linux
+
+On MacOSX you can install Micromamba from homebrew
+
+```bash
+brew install micromamba
+
+# Initialize shell configuration if necessary (ZSH is now MacOSX default):
+./micromamba shell init -s zsh ~/micromamba
+
+source ~/.zshrc
+```
+
+On Linux you can install Micromamba from the commandline:
+
+```bash
+# Linux/Bash Intel (x86_64):
+curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+
+# Initialize shell configuration:
+./bin/micromamba shell init -s bash ~/micromamba  # this writes to your .bashrc file
+
+# sourcing the bashrc file incorporates the changes into the running session.
+# better yet, restart your terminal!
+source ~/.bashrc
+```
+
+
+For more backround, please read the manual:
+<https://mamba.readthedocs.io/en/latest/micromamba-installation.html>
+

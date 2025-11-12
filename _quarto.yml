@@ -12,10 +12,18 @@ book:
     search: true
   chapters:
     - index.qmd
-    - terminology/terminology.qmd
-    - dggs_grids/dggs_grids.qmd
-    - data_conversion/data_conversion.qmd
-    # - workshop/workshop.qmd
+    - part: "DGGS Concepts & Introduction"
+      chapters:
+        - terminology/terminology.qmd
+        - dggs_grids/dggs_grids.qmd
+        - data_conversion/data_conversion.qmd
+        # - workshop/workshop.qmd
+    - part: "Python Setup for the workshop"
+      chapters:
+        - pysetup/Installing_Micromamba.qmd
+        - pysetup/Creating_environments.qmd
+        - pysetup/test_installation.qmd
+        - pysetup/Alternative_Miniconda.qmd
     - references/references.qmd
 
 bibliography: references.bib
