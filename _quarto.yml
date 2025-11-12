@@ -17,7 +17,7 @@ book:
       chapters:
         - terminology/terminology.qmd
         - dggs_grids/dggs_grids.qmd
-        - data_conversion/data_conversion.qmd
+        # - data_conversion/data_conversion.qmd
         # - workshop/workshop.qmd
     - part: "Python Setup for the workshop"
       chapters:

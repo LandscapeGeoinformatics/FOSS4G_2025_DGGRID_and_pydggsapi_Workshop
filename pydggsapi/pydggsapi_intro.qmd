@@ -1,1 +1,3 @@
-# pydggsapi and OGC API - DGGS
+# Installation and configuration
+
+[https://pydggsapi.readthedocs.io/en/latest/](https://pydggsapi.readthedocs.io/en/latest/)

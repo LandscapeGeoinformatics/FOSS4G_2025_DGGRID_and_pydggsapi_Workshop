@@ -1,3 +1,7 @@
-# DGGRID and dggrid4py
+# Installation and use
 
-lorem ipsum
+[https://dggrid4py.readthedocs.io/en/latest/](https://dggrid4py.readthedocs.io/en/latest/)
+
+References:
+
+- [https://dggrid.readthedocs.io/latest/](https://dggrid.readthedocs.io/latest/dggrid_man_V841.html)
