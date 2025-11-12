@@ -6,6 +6,7 @@ book:
   title: "Hands-on DGGS and OGC DGGS-API with DGGRID and pydggsapi Workshop"
   author: "Alexander Kmoch, Wai Tik Chan, Iris Luik, Kajetan Marcin Chrapkiewicz, Evelyn Uuemaa"
   description: "This hands-on workshop walks through a full DGGS data pipeline. You'll use the FOSS tool DGGRID to index geospatial data and then publish it using pydggsapi, a new open-source server for the OGC API DGGS standard. Leave with a running web service on your laptop."
+  license: "CC BY 4.0"
   date: "11/12/2025"
   sidebar:
     logo: files/TYGI_b_logo_transp.png

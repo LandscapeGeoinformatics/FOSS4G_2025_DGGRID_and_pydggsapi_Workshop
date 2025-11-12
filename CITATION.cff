@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use these materials, please cite it as below."
+authors:
+- family-names: "Chan"
+  given-names: "Wai Tik"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Luik"
+  given-names: "Iris"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Chrapkiewicz"
+  given-names: "Kajetan Marcin"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Kmoch"
+  given-names: "Alexander"
+  orcid: "https://orcid.org/0000-0003-4386-4450"
+- family-names: "Uuemaa"
+  given-names: "Evelyn"
+  orcid: "https://orcid.org/0000-0002-0782-6740"
+title: "Landscape Geoinformatics EGU 2021 workshop materials"
+version: 0.0.3
+doi: 10.5281/zenodo.xxx
+date-released: 2025-11-17
+url: "https://landscapegeoinformatics.github.io/FOSS4G_2025_DGGRID_and_pydggsapi_Workshop/"
