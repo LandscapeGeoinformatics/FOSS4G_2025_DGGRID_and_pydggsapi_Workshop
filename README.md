@@ -47,3 +47,7 @@ This workshop is for developers, data managers, and generally DGGS and geospatia
 Participants should be comfortable with the command line and have a basic understanding of what geospatial raster and vector data are. We can use Docker or plain Miniconda/Micromamba/Pixi Python environments to ensure the dependencies are easy to set up for everyone. Bring your laptop (Win, Mac, Linux, *BSD might all work).
 
 By the end, you will understand the concepts of DGGS-indexed data and will have built a functioning DGGS-based web service yourself.
+
+The materials are hosted currently on GitHub pages:
+
+- [https://landscapegeoinformatics.github.io/FOSS4G_2025_DGGRID_and_pydggsapi_Workshop/](https://landscapegeoinformatics.github.io/FOSS4G_2025_DGGRID_and_pydggsapi_Workshop/)

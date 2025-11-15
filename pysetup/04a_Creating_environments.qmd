@@ -1,4 +1,4 @@
-# Python environments
+# 4. Python environments
 
 It is important to understand, that you are always `residing`
 somewhere in some folder. This will in particular important to make sure
@@ -131,7 +131,5 @@ To activate this environment, use:
 ```
 
 
-In the [next steps we will verify the installation and test that
-everything works](test_installation.html) in our new `geopython2025`
-conda Python environment and configure Jupyter Notebooks.
-
+In the next step, [5. Setting up Jupyter Notebook](05_setup_jupyter.html), we will verify the installation, test that
+everything works and configure the JupyterLab notebook server.

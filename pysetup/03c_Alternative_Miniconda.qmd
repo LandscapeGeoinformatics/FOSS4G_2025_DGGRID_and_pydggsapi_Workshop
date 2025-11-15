@@ -1,0 +1,86 @@
+# Historically: Miniconda {.unnumbered}
+
+::: {.callout-tip}
+**Miniconda** is an encapsulated versatile virtual python environment
+installer, that works under the hood of the big Anaconda python
+distribution. Miniconda is basically a mini version of Anaconda that
+includes only the conda package manager and its dependencies!
+:::
+
+This section explains an alternative way to install Python and binary packages with Miniconda, and can still be useful as an alternative.
+
+<https://conda.io/miniconda.html>
+
+Following steps have been tested to work on Windows 10 with
+Anaconda/Miniconda 64 bit.
+
+[Download Miniconda installer (64
+bit)](https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe)
+a Python 3.9+, 64-bit (exe installer) for Windows.
+
+::: {.callout-warning}
+BEWARE:
+
+-   To install miniconda SYSTEM-WIDE for ALL users, this does require
+    administrator permissions; every users can then create their own
+    environments with the conda tool.
+-   Please do NOT make Conda the default python for the system if you
+    don\'t want it to interfere with other Python installations you
+    might have, eg. Pythons of ArcGIS and QGis etc
+:::
+
+Install Miniconda on your computer by double clicking the installer and
+install it into a directory you want.
+
+Install it to **all users** and use default settings.
+
+Additional install information:
+<https://conda.io/projects/conda/en/latest/user-guide/index.html>
+
+
+## Verifying the Miniconda installation
+
+::: {.callout-note}
+
+As a convention, whenever I demonstrate Python codes or using commands
+on the the shell/cmd commandline, using the `#` symbol implies a
+`comment`. This line, respectively everything after that symbol is NOT
+to be executed.
+:::
+
+In order to test that the `conda` package manager works we have to go
+through a few more steps: After successful installation you should have
+a menu entry in the Windows Start Menu:
+
+`Anaconda Prompt`
+
+This is a Windows CMD (Commandline window, that \"knows\" about, where
+your Miniconda/Anaconda installation lies, and where to find the `conda`
+tool (without interfering other Python installations on your computer).
+After it opens it should display somehow like so:
+
+``` bash
+(base) C:\Users\Alexander>
+
+or
+
+(C:\dev\conda3) C:\Users\Alexander>
+```
+
+On the command line type command `conda --version` in order to see if
+the command is successful, it should show the version of the conda tool.
+
+``` bash
+(base) C:\Users\Alexander> conda --version
+conda 4.10.3
+```
+
+Now we have the base **conda**/**Anaconda** installation available. The
+next step is [4. Creating environments and install
+packages](04a_Creating_environments.html) to create a flexible Python
+working environment.
+
+From here you can use micromamba or conda, especially for
+installing additional packages or creating environments with an
+environment.yml file.
+

@@ -1,0 +1,76 @@
+# Alternative installation methods for Conda environments {.unnumbered}
+
+In the previous section () we installed our specific conda Python
+environment with a pre-defined environment configuration file. In this
+section we show an alternative variant how you can install conda
+environments in a more flexible way if you need to.
+
+You could do this with 'conda/miniconda' or 'mamba/micromamba', just use the appropriate tool which you have installed.
+
+::: admonition
+BEWARE:
+
+Please DO NOT follow these steps, if you already have the environment
+installed via the `environment.yml` configuration above.
+:::
+
+This other variant is typically more widely used in exploratory setups.
+It is a step-by-step procedure. Here we are making sure that Python in
+version 3.10 or 3.11 will be installed and that we want to explicitly use the
+additional package channel [conda-forge]{.title-ref}. And we give the
+environment a name (-n).
+
+If you would create your environment manually, it would go like that:
+Open the `Anaconda prompt` from the Start Menu and type the command
+below.
+
+``` 
+(C:\dev\conda3) conda create -n geopython2025alt python=3.11 -c conda-forge
+```
+
+Ok, now that we have installed a Python working environment with the
+name `geopython2025alt` with our desired library packages, we can check
+installed environments just to be sure. In order to show all
+environments that have already been created you can ask conda to list
+these:
+
+``` 
+(C:\dev\conda3)  conda env list
+```
+
+Now we want to activate that environment, install additional packages
+and start working with it:
+
+``` 
+(C:\dev\conda3)  activate geopython2025alt
+
+(geopython2025alt)
+```
+
+Install GIS related packages with conda by running in command prompt
+following commands (in the same order as they are listed). Make sure you
+are in the correct environment (don\'t install into `base`, install new
+packages ideally only into your designated created environments)
+
+``` 
+(geopython2025alt) conda install -c conda-forge numpy pandas gdal fiona shapely geopandas
+
+# Install matplotlib and Jupyter Lab/Notebook
+(geopython2025alt) conda install -c conda-forge matplotlib jupyter jupyterlab
+
+# Install seaborn
+(geopython2025alt) conda install -c conda-forge seaborn
+
+# Install geoplot and cartopy
+(geopython2025alt) conda install -c conda-forge cartopy geoviews
+
+# Install mapclassify
+(geopython2025alt) conda install -c conda-forge mapclassify
+
+# Install rasterio and rasterstats
+(geopython2025alt) conda install -c conda-forge rasterio rasterstats
+```
+
+
+In the next step, [5. Setting up Jupyter Notebook](05_setup_jupyter.html), you would continue with verifying the installation, testing that
+everything works and configuring the JupyterLab notebook server.

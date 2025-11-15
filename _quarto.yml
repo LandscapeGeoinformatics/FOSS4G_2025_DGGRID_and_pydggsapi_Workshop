@@ -15,17 +15,17 @@ book:
     - index.qmd
     - part: "DGGS Concepts & Introduction"
       chapters:
-        - terminology/terminology.qmd
-        - dggs_grids/dggs_grids.qmd
+        - 01_terminology.qmd
+        - 02_dggs_grids.qmd
         # - workshop/workshop.qmd
     - part: "Python Setup for the workshop"
       chapters:
-        - pysetup/Installing_Micromamba.qmd
-        - pysetup/alt_install_miniconda.qmd
-        - pysetup/Creating_environments.qmd
-        - pysetup/test_installation.qmd
-        - pysetup/Alternative_Miniconda.qmd
-        - pysetup/experimental_pixi.qmd
+        - pysetup/03a_Installing_Micromamba.qmd
+        - pysetup/03c_Alternative_Miniconda.qmd
+        - pysetup/03d_experimental_pixi.qmd
+        - pysetup/04a_Creating_environments.qmd
+        - pysetup/04b_alt_install_miniconda.qmd
+        - pysetup/05_setup_jupyter.qmd
     - part: "DGGRID and dggrid4py"
       chapters:
         - dggrid/dggrid_intro.qmd

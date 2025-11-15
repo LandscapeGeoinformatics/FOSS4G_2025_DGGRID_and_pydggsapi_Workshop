@@ -22,32 +22,31 @@ We simplify it further by focusing on only three aspects (`Base polyhedron, Refi
  
 ## IGEO7
 
-IGEO7 was announced at the AGILE conference [-@agile-giss-6-32-2025] It is also a **hexagonal** DGGS based on **a icosahedron with a refinement ratio of 7**, just like H3. However, it uses the **Icosahedral Snyder Equal Area (ISEA**) as its projection to achieve equal area for all zones at the same refinement level. The following figure shows how the 20 faces of icosahedron are oriented and tiled.
+IGEO7 is implemented in the tool [DGGRID](https://github.com/sahrk/DGGRID) and was described at the AGILE 2025 conference [-@agile-giss-6-32-2025]. It is also a **hexagonal** DGGS based on **a icosahedron with a refinement ratio of 7**, similr to to H3. However, it uses the **Icosahedral Snyder Equal Area (ISEA**) as its projection to achieve equal area for all zones at the same refinement level. The following figure shows how the 20 faces of icosahedron are oriented and tiled.
 
-![IGEO7 orientation - Sahr et al. [-@Sahr2004]](../files/figures/igeo7_flatten.png){width=60%}
+![IGEO7 orientation - Sahr et al. [-@Sahr2004]](files/figures/igeo7_flatten.png){width=60%}
 
 ### Zone ID and indexing
 
 The zone ID of IGEO7 formation is similar to rHEALPix; it is a string of digits (e.g.`00142352345`) where the first two digits are the face ID. Each digit after the face ID represents the child zone position of the parent. The child zone is ordered according to the Central Place Indexing (CPI) hierarchy index introduced by @sahr_central_2019. The following figure shows how child zones are ordered to create the zone ID at each level.
 
 
-![IGEO7 zones ordering](../files/figures/z7_order.png){width=30%}
+![IGEO7 zones ordering](files/figures/z7_order.png){width=30%}
 
-![IGEO7 zones traversal - Kmoch et al. [-@agile-giss-6-32-2025]](../files/figures/z7_traversal.png){width=60%}
+![IGEO7 zones traversal - Kmoch et al. [-@agile-giss-6-32-2025]](files/figures/z7_traversal.png){width=60%}
 
 
 ### Zone area distortion
 
-The zone area distortion is similar to rHEALPix. Still, there are exceptional cases where the distortion is relatively large: those regions near the twelve pentagons (vertices of icosahedron). To reduce the effect of those regions, the orientation of the icosahedron is carefully designed so that most of them fall into the ocean.
+The zone area distortion is very small. The are twelve pentagons (vertices of icosahedron) at every resolution. To reduce the effect of those regions, the orientation of the icosahedron is carefully designed so that most of them fall into the ocean.
 
-![IGEO7 global area distortion - Kmoch et al. [-@Kmoch03072022]](../files/figures/area_distortion_isea7h.png){width=60%}
-
+![IGEO7 global area distortion - Kmoch et al. [-@Kmoch03072022]](files/figures/area_distortion_isea7h.png){width=60%}
 
 
 ## H3
 H3 is the first commercial hexagonal DGGS developed by Uber for spatial event-driven data analysis. It follows the Dymaxion orientation to unfold the **icosahedron** into 20 tiles. The 20 tiles are subdivided into **hexagons with a refinement ratio of 7**. Those hexagons are inverse projected back to the sphere using **gnomonic projection**. 
 
-![H3 Dymaxion orientation (Wiki)](../files/figures/dymaxion_projection.png){width=60%}
+![H3 Dymaxion orientation (Wiki)](files/figures/dymaxion_projection.png){width=60%}
 
 ### Zone ID and indexing
 
@@ -60,50 +59,51 @@ The zones of H3 are not equal in area over the globe at the same refinement leve
 
 @Kmoch03072022 shows the global area distortion for H3. The figure shows that the zone area varies in different regions over the globe.
 
-![H3 global area distortion - Kmoch et al. [-@Kmoch03072022]](../files/figures/area_distortion_h3.png){width=60%}
+![H3 global area distortion - Kmoch et al. [-@Kmoch03072022]](files/figures/area_distortion_h3.png){width=60%}
 
 
 
 ## HEALPix
-HEALPix[-@Górski_2005] originates from the astronomical community, and it is a hierarchical, congruent and aligned square grid projected to a sphere used to study the background radiation and global warming. HEALPix works directly on a sphere and `pixelises` (discretises in DGGS) the sky (Earth surface) into a map. It performs the partition directly on the sphere with the 12 pixels as the base. The following figure shows how the sphere is tessellated into finer refinement levels.
+HEALPix[-@Gorski_2005] originates from the astronomical community, and it is a hierarchical, congruent and aligned square grid projected to a sphere used to study the background radiation and global warming. HEALPix works directly on a sphere and `pixelises` (discretises in DGGS) the sky (Earth surface) into a map. It performs the partition directly on the sphere with the 12 pixels as the base. The following figure shows how the sphere is tessellated into finer refinement levels.
 
-![How HEALPix partition the sphere - Gorski et al. [-@Górski_2005]](https://healpix.sourceforge.io/images/gorski_f1.jpg){width=40%}
+![How HEALPix partition the sphere - Gorski et al. [-@Gorski_2005]](https://healpix.sourceforge.io/images/gorski_f1.jpg){width=40%}
 
 ### Zone ID and indexing
 
 HEALPix has two indexing schemas: `ring indexing` and `nested indexing`. The ring index used the property of isolatitude to order the zones. Here, we will focus on the nested index that provides the hierarchical structure. The nested index uses QuadCube and follows the z-order space-filling curve, as shown in the following diagram.
 
-![HEALPix nested indexing - Gorski et al. [-@Górski_2005]](../files/figures/healpix_nested_index.png){width=60%}
+![HEALPix nested indexing - Gorski et al. [-@Gorski_2005]](files/figures/healpix_nested_index.png){width=60%}
 
 ## rHealpix
 rHEALPix[-@Gibb2016] is a modification of the HEALPix projection from spherical to ellipsoids of revolution. Following the refinement schema, it projects an ellipsoid onto the **cube** and subdivides it into **square grids**. Then the grid is inverse projected back to the ellipsoids by the **rHealpix projection**. The following diagram shows how rHEALPix flattens the Earth into a cube of 6 tiles.
 
-![How rHEALPix tiles the globe - Gibb et al. [-@Gibb2016]](../files/figures/rhealpix_flatten.png){width=60%}
+![How rHEALPix tiles the globe - Gibb et al. [-@Gibb2016]](files/figures/rhealpix_flatten.png){width=60%}
 
 ### Zone ID and indexing
 
 The following diagram shows how the planar square grid is inversely projected to an ellipsoid and how zones are indexed. The diagram G'1 shows the unique feature of rHEALPix - isolatitude. It is easy to see that all zone centroids align to the same latitude, and it is an important feature when performing spherical harmonic analysis.
 
-![rHEALPix projection - Gibb et al. [-@Gibb2016]](../files/figures/rhealpix_project.png){width=60%}
+![rHEALPix projection - Gibb et al. [-@Gibb2016]](files/figures/rhealpix_project.png){width=60%}
 
 The zone ID of rHEALPix forms with a character that represents the faces of the cube, followed by a string of digits (e.g. P0212423). Each digit represents the discrete position of the subdivided square grid at the current refinement level. So the length of the digits shows the level of refinement. The digits are arranged according to the Z space-filling curve from top to bottom and left to right.
 
-![rHEALPix zone indexing - Gibb et al. [-@Gibb2016]](../files/figures/rhealpix_z_path.png){width=20%}
+![rHEALPix zone indexing - Gibb et al. [-@Gibb2016]](files/figures/rhealpix_z_path.png){width=20%}
 
 ### Zone area distortion
 
 The HEALPix and rHEALPix projections are equal area for the globe at the same refinement level. @Kmoch03072022 studied the global area distortion of rHealpix. The following figure shows that the distortion is minimal and almost equal to the normalised area everywhere on the Earth.
 
-![rHEALPix area distortion - Kmoch et al. [-@Kmoch03072022]](../files/figures/area_distortion_rhealpix.png){width=60%}
+![rHEALPix area distortion - Kmoch et al. [-@Kmoch03072022]](files/figures/area_distortion_rhealpix.png){width=60%}
 
 
 ## Other DGGS 
 
 Other types of DGGS are available for different application needs (non-exhaustive list):
 
+- [DGGAL](https://dggal.org/), the Discrete Global Grid Abstraction Library by Ecere implements several DGGS
+- [Uber H3](https://h3geo.org/), a widely used non-equal are hexagonal grid systems
+- [Google S2](http://s2geometry.io/) provides a very efficient square grid for computation
 - [OpenEAGGR](https://github.com/riskaware-ltd/open-eaggr?tab=readme-ov-file) by RiskAware provides the triangle and hexagonal grids with a refinement ratio of 3 and 4, respectively
-- [Google S2](http://s2geometry.io/) provides a very efficient square grid for computation.
-- [DGGAL](https://dggal.org/), the Discrete Global Grid Abstraction Library
-- [Awesome Discrete Global Grid Systems (DGGS)](https://github.com/LandscapeGeoinformatics/awesome-discrete-global-grid-systems) - A collection of DGGS resources for science and standards, and fun and profit.
+- [Awesome Discrete Global Grid Systems (DGGS)](https://github.com/LandscapeGeoinformatics/awesome-discrete-global-grid-systems) - A collection of DGGS resources, listing many libraries that implement DGGS.
 
 Several more are described in the scientific literature, but lack real-world implementations.

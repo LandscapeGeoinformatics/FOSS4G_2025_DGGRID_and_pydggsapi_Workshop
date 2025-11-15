@@ -1,13 +1,9 @@
-# Installation of Python 
+# 3. Python package manager for Conda-Forge
 
-**How to start doing GIS with Python on a computer?**
+**Why an additional Python package manager?**
 
-Well, first you need to install Python and necessary Python modules that
-are used to perform various GIS-tasks. The purpose of this page is to
-help you out installing Python and all those modules into your own
-computer. Even though it is possible to install Python from their
-[homepage](https://www.python.org/), **we highly recommend using**
-modern Python environment management and package installation system based on [Conda-Forge](https://conda-forge.org/).
+To install certain binary package dependencies, `pip` or "pip-only" package managers (like `uv` and other) **we highly recommend using**
+a Python environment management and package installation system based on [Conda-Forge](https://conda-forge.org/). 
 
 Conda-Forge is a community-led collection of recipes, build infrastructure and distributions for the conda package management system.
 It is not a static distribution, but rather a continually updated set of packages, which provides open
@@ -17,6 +13,8 @@ computing, that aims to simplify package management and deployment. In
 short, it makes life much easier when installing new tools on your
 Python to play with.
 
+Especially for Windows computers where installing packages like `GDAL` becomes difficult (WSL2 would be Linux again), or when experimenting even on Linux and MacOSX, `conda` packages allow for a lot of quality of life improvements.
+
 Conda-Forge is platform-agnostic and provides packages for Linux, macOS and Windows systems.
 These packages may be installed with the command `conda install PACKAGENAME` or `mamba install PACKAGENAME` (see below).
 
@@ -25,9 +23,10 @@ There are nowadays 2-3 major ways to access the conda-forge ecosystem:
 - [Anaconda](https://www.anaconda.com/products/individual) is a full distribution of the conda-forge ecosystem, and includes Python, the conda package manager, and many other useful packages.
 - [Miniconda](https://docs.conda.io/en/latest/miniconda.html) is a smaller distribution that includes Python and the conda package manager and is quite light-weight.
 - [Micromamba](https://mamba.readthedocs.io/en/latest/) is a drop-in replacement for the conda package manager, but with much faster package installation speed.
+- [Pixi.sh](https://pixi.sh/latest/) Pixi is a fast, modern, and reproducible package management tool for developers of all backgrounds, that basically combines the speed and ergonomy of [uv](https://docs.astral.sh/uv/) with the binary package access to conda-forge.
 
 ::: {.callout-important}
-In this course, we will use Micromamba to install our Python environment!
+In this workshop, we will use Micromamba to install our Python environment!
 
 But we will synonymously use the term `conda` environment to refer to the Python environments, be they managed with `micromamba`, `conda`, or `mamba`.
 :::
@@ -131,7 +130,14 @@ curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/mi
 source ~/.bashrc
 ```
 
-
 For more backround, please read the manual:
 <https://mamba.readthedocs.io/en/latest/micromamba-installation.html>
+
+From here you can use micromamba for
+installing additional packages or creating environments with an
+environment.yml file.
+
+The next step is [4. Creating environments and install
+packages](04a_Creating_environments.html) to create a flexible Python
+working environment.
 

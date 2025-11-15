@@ -1,4 +1,4 @@
-# Experimental: Pixi.sh
+# Experimental: Pixi.sh  {.unnumbered}
 
 Pixi is a fast, modern, and reproducible package management tool for developers of all backgrounds.
 
@@ -44,3 +44,26 @@ What does this do?
 
 The above invocation will automatically download the latest version of pixi, extract it, and move the pixi binary to `%UserProfile%\.pixi\bin`. The command will also add `%UserProfile%\.pixi\bin` to your `PATH` environment variable, allowing you to invoke pixi from anywhere.
 Now restart your terminal or shell to make the installation effective.
+
+## Installing packages and running commands
+
+For more backround, please read the manual:
+<https://pixi.sh/latest/getting_started/>
+
+From here you would use `pixi` for
+installing additional packages or creating environments with an
+environment.yml file.
+
+The next step is creating environments and install
+packages into into your folder-based flexible Python
+working environment. For here you should know what you are doing, as this is different from 
+the micromamba/conda approach documented for this workshop.
+
+Check out the [4. Creating environments and install
+packages](04a_Creating_environments.html) page to see which packages are needed.
+
+Then, set up the JupyterLab notenook environment with Pixi. 
+
+- [https://pixi.sh/latest/integration/editor/jupyterlab/](https://pixi.sh/latest/integration/editor/jupyterlab/)
+
+Check out the [5. Setting up Jupyter Notebook](05_setup_jupyter.html) page to see for the Micromamba approach.

@@ -1,4 +1,6 @@
-# Test that everything works
+# 5. Setting up Jupyter Notebook
+
+## First,test that everything works
 
 If you don\'t have the Powershell open, please open it.
 `Powershell` can be found by clicking on the Windows start menu
@@ -52,7 +54,7 @@ Under Mac/Linux you might have to press **Ctrl+D** to exit.
 (geopython2025) >>> exit()
 ```
 
-## Setting up Jupyter Notebook
+## Install IPykernel and start up Jupyter Notebook
 
 The Jupyter Notebook server is an open-source web application that
 allows you to create and share documents that contain live code,
