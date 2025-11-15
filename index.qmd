@@ -3,7 +3,7 @@
 Imagine a **grid covering the entire globe** where every cell has a **unique ID that tells you both its location and size** (the latter is constant at a given resolution). That's essentially what a Discrete Global Grid System (DGGS) is—**a table of the Earth's surface**. This makes **spatial analysis as simple as database operations**.
 
 
-![Transformation from a traditional projected coordinate system grid to a Discrete Global Grid System (DGGS)](files/figures/epsg_dggs.png)
+![Transformation from a traditional projected coordinate system grid to a Discrete Global Grid System (DGGS); CC-BY-4.0 [-@dggrid4py_kmoch_2025]](files/figures/epsg_dggs.png)
 
 ## The problem with traditional approaches
 Traditional coordinate systems introduce distortions in area, shape, or distance. Hierarchical, zone-based DGGS framework reduces these geographic biases.

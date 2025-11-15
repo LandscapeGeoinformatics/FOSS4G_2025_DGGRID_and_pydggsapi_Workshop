@@ -1,4 +1,4 @@
-# 3. Converting data into DGGS
+# Converting data into DGGS
 
 The key functionality for any DGGS is the indexing and conversion of data into the grid - known as
 **ingestion**. Once vector (point, polygon or line) or raster data has been ingested into a DGGS
@@ -58,9 +58,31 @@ This is the basic strategy where spatial join is used to assign polygon attribut
 
 - **Weighted overlay**
 
-This is the most conservative yet computationally demanding approach. It works much like the weighted overlay method
+This is also called conservative regridding and is computationally the most demanding but also most preserving approach. It works much like the weighted overlay method
 described above in raster conversion chapter.
 
 
 ![Vector data to DGGS](../files/figures/conversion_vector_to_dggs.png)
+
+## technical approaches, tools
+
+Consideration: ideally, many data sources will be collected already into a DGGS. regridding large amounts of data for now creates duplicates.
+
+- raster2dggs/vector2dggs (several DGGS supported already)
+- xarray/xdggs ecosystem  (several DGGS supported already)
+
+- roll yourself, geospatial processing with geopandas and rasterio
+
+
+## How to store DGGS data
+
+- Parquet - any tabular representation (incl CSV or databases)
+- Zarr - n-dimensional arrays (zone-id, plus time, and variables)
+- DGGS-JSON/DGGS-UBJSON - see OGC DGGD API, a well-structured, highly compressed JSON representation, comes with specific constraints (subzone ordering), because zone-ids are not stored
+
+
+### Overviews and partitioning
+
+- aggregation, hierarchical or flat (from baseline)
+- indexing/partitioning via higher-level zones
 

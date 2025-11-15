@@ -4,11 +4,13 @@ DGGS has a long history of development, and terms evolve with time. This section
 
 ## Base polyhedron
 
-DGGSs are based on polyhedrons which approximate the Earth's spherical shape more accurately than a plane.
+DGGSs are created by subdividing the Earth's surface systematically into smaller and smaller similir slices. Most DGGSs are based on polyhedrons which approximate the Earth's spherical shape more accurately than a plane.
 Five platonic solids can be used as the basis for DGGS tesselations: tetrahedron, hexahedron(cube), octahedron, dodecahedron and icosahedron.
 The **icosahedron** has the highest number of faces, which minimises the projection distortions compared to other platonic solids and makes it the most commonly used base solid.
 
 ![Five platonic solids: tetrahedron, hexahedron(cube), octahedron, dodecahedron and icosahedron and their projections onto a sphere - Lei et al. [-@Lei2020]](../files/figures/base_polyhedron.png)
+
+Some DGGSs, like HEALPIX [-@Gorski_2005] or EASE-DGGS [-@thompson_ease_dggs_2022] are based on custom pixelation schemas.
 
 ## Zone
 
@@ -16,7 +18,7 @@ A zone (or cell) is the primitive geometric unit which represents a discrete are
 
 ## Zone id
 
-To enable data retrieval, each zone is assigned a unique identifier. These ID's are often designed to encode hierarchical relationships and/or spatial proximity.
+To enable data retrieval, each zone is assigned a unique identifier. These ID's are often designed to encode hierarchical relationships and/or spatial proximity (often also referred to as cell ID).
 
 ## Refinement
 
@@ -31,7 +33,7 @@ The process of dividing a zone into a set of child zones. There are some conside
 :::
 
 
-![Refinement of a triangular grid. Question - what's the refinement ratio?](../files/figures/4aperture_triangles.png){width=50%}
+![Refinement of a triangular grid. Question - what's the refinement ratio? Figures: CC-BY-4.0 [-@Kmoch03072022]](../files/figures/4aperture_triangles.png){width=50%}
 
 
 ## Refinement ratio (aperture)
@@ -40,7 +42,7 @@ Refinement ratio (also known as aperture) describes how many child zones are cre
 In hexagonal grids, typical refinement ratios are 3, 4, and 7, with 7 being the most effective, as it divides each parent hexagon into 7 
 smaller hexagons, maintaining an almost congruent (same shape and size) parent-child relationship.
 
-![Different refinement ratios on hexagonal grid](../files/figures/refinement_ratios.png)
+![Different refinement ratios on hexagonal grid; Figures: CC-BY-4.0 [-@agile-giss-6-32-2025]](../files/figures/refinement_ratios.png)
 
 
 ## Refinement level (resolution)
@@ -48,4 +50,4 @@ smaller hexagons, maintaining an almost congruent (same shape and size) parent-c
 Refinement level indicates how many times the faces of the base polyhedron have been subdivided, with higher levels representing finer grid resolutions.
 Lower refinement level refers to larger zones suitable for global-scale analysis, while higher refinement level refers to smaller zones, making it useful for local studies.
 
-![Different refinement levels of the hexagonal grid](../files/figures/refinement_levels_estonia.png)
+![Different refinement levels of the hexagonal grid; Figures: CC-BY-4.0 [-@agile-giss-6-32-2025]](../files/figures/refinement_levels_estonia.png)

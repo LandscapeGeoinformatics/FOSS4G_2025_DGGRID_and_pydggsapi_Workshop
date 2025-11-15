@@ -17,7 +17,6 @@ book:
       chapters:
         - terminology/terminology.qmd
         - dggs_grids/dggs_grids.qmd
-        # - data_conversion/data_conversion.qmd
         # - workshop/workshop.qmd
     - part: "Python Setup for the workshop"
       chapters:
@@ -30,6 +29,7 @@ book:
     - part: "DGGRID and dggrid4py"
       chapters:
         - dggrid/dggrid_intro.qmd
+        - data_conversion/data_conversion.qmd
         # - dggrid_advanced/dggrid_advanced.qmd
     
     - part: "Pydggsapi and OGC API - DGGS"
