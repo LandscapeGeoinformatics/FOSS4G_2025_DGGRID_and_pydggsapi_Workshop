@@ -1,0 +1,108 @@
+# 7. Converting data into DGGS
+
+A key stepping stone for any DGGS to benefit of its capabilities is the indexing and conversion of data into the grid - also known as
+**ingestion**. Once vector (point, polygon or line) or raster data has been ingested into a DGGS, data can queried, processed, or hierarchically aggregated into parent zones at lower resolutions.
+
+In general, one should always have an overview of the available, typically fixed, refinement levels, and their zone size statistics at each level. Often, you want to ingest data at the highest level possible without over-sampling, but sometimes you want to consider a given refinement level based on an analysis type, or just bin densities (like a spatial histogram).
+
+## Vector data to DGGS
+
+The ingestion of vector **points** (point binning/location coding) is straightforward, as all DGGS implementations have methods for converting
+coordinates to zone ids. A highest required refinement level could be determined by finding the nearest neighbour distance between points or the smallest area via a Voronoi polygon generation. If duplicates are acceptable, or if the interest is on calculating densitites, coarser refinement levels should be chosen.
+
+Alternatively, it can also be calculated by processing all points in a loop, where features are converted into DGGS indexes and
+duplicates are counted. With each iteration the refinement level is increased by one until there are no duplicates or the
+resolution value is at a defined maximum.
+
+**Lines** quantization is less common, it can be performed by treating line vertices as points to apply above methods for determining
+optimal resolution and then binning the zones containing those vertices.
+
+Ingesting **polygon** vector data can be more complex. It requires careful selection of DGGS refinement level to minimize data
+loss due to undersampling. An appropriate refinement level can be determined automatically with the following pseudo algorithm: 
+first, calculate the area of the smallest polygon in the input dataset; next, calculate the average zone area of a range
+of DGGS refinement levels. If the ratio of polygon area to zone area is smaller than the desired treshold, then the corresponding
+resolution is suitable for ingestion.
+
+There are three main options for ingesting polygon data:
+
+- **Creating DGGS zones inside polygons (polyfill)**
+
+In this case the DGGS zones are created only inside polygons. If the zones are created per polygon, the attribute values can be assigned directly. Alternatively, a spatial join can used to assign polygon attributes to the created DGGS grid zones (ideally, more stable, a join of the DGGS zone centroids with the polygons, see below).
+
+- **DGGS grid centroids spatial join**
+
+This is a basic strategy where a spatial join is used to assign polygon attributes to pre-created grid zones, where the centroids of the pre-created DGGS zones are spatial intersected with a polygon layer.
+
+- **Weighted overlay**
+
+The value of each DGGS cell is computed
+based on the proportion of area overlap between each source polygon and the DGGS cells. This implies, that the DGGS grid over the same spatial domain has to be pre-created.
+
+
+![Vector data to DGGS. Figures: Copyright &copy; [Landscape Geoinformatics Lab](https://landscape-geoinformatics.ut.ee/)](../files/figures/conversion_vector_to_dggs.png)
+
+## Raster data to DGGS
+
+There are several approaches for converting raster data into DGGS.
+
+- performing **zonal statistics** 
+
+First create cell geometries over the 
+raster extent. Then perform classic zonal statistics using the DGGS zones as summary polygons over the raster grid. This approach is computationally expensive but 
+enables effective conversion to any lower refinement level of DGGS using any desired zonal statistics method - typically mean for scalar data, or majority/mode for categorical data.
+
+- **binning raster pixel centroids**
+
+Another straightforward approach is binning raster pixel centroids into DGGS zone ids, analogous to point binning. In this method, the coordinates of
+raster pixel centroids are directly calculated into the corresponding DGGS cells indexes. This avoids expensive
+vector geometry generation, as described above, but requires that the DGGS refinement level is close to
+the resolution of the ingested raster. Using a lower DGGS resolution would effectively need to treated as **zonal statistics** instead. Significantly finer DGGS resolution introduces artefacts (empty cells), when no raster centroid falls into a DGGS zone. To fill these is a whole different can of worms (e.g. interpolation).
+
+- **Sampling the raster with DGGS centroids**
+
+Sampling the raster surface with the DGGS grid centroids is a similar approach, but sort of inverse: in this case the DGGS cell centroids are pre-created and are then used to sample the raster. This is computationally more intensive again, because the DGGS cells over the whole raster have to be created first, and then for each cells centroid the raster sample has to be retrieved. This only makes sense when the DGGS refinement level is close to
+the resolution of the ingested raster, or even higher. Using a lower DGGS resolution would lead to data loss due to sparser distribution of
+DGGS cell centroids compared to raster pixels. Significantly finer DGGS resolution introduces unnecessary 
+oversampling (sampling the same raster pixel with several cells). 
+
+- **weighted overlay** (conservative regridding)
+
+The most careful approach is again **weighted overlay** (conservative regridding). Unlike the previously described methods, 
+this preserves the total value of the mapped variable across the spatial domain. This is also called conservative regridding and is computationally the most demanding but also most preserving approach. Each raster pixel is effectively converted into a reactangular polygon, and then the weighted overlay method is applied as 
+described above in vector conversion section, thus, raster pixels with larger overlaps
+have bigger influence.
+
+![Raster data to DGGS. Figures: Copyright &copy; [Landscape Geoinformatics Lab](https://landscape-geoinformatics.ut.ee/)](../files/figures/conversion_raster_to_dggs.png)
+
+
+## Background: technical approaches
+
+Consideration: ideally, many data sources will be collected already into a DGGS at the observation/field mapping stage. Regridding large amounts of data for now creates multiple copies.
+
+### How to store DGGS data
+
+- Parquet - any tabular representation (incl CSV or databases)
+- Zarr - n-dimensional arrays (zone-id, plus time, and variables)
+- DGGS-JSON/DGGS-UBJSON - see OGC DGGD API, a well-structured, highly compressed JSON representation, comes with specific constraints (subzone ordering), because zone-ids are not stored
+
+
+### Overviews and partitioning
+
+- aggregation, hierarchical or flat (from baseline)
+- indexing/partitioning via higher-level zones
+
+
+### Are there tools for that?
+
+- raster2dggs/vector2dggs (several DGGS supported already)
+- xarray/xdggs ecosystem  (several DGGS supported already)
+
+- roll yourself, geospatial processing with geopandas and rasterio
+
+## Example notebook
+
+1. Download the [DEM elevation example file](../files/merit_dem_pori_cog.tif) and save also in your work folder. Generally, any GeoTIFF file can work, but it should be preprocessed into a COG file for a better internal window block layout. This batched conversion will not work, if the Tiff file has a striped data layout.
+
+2. Download the [raster_to_dggs_parquet.ipynb](../files/raster_to_dggs_parquet.ipynb) notebook file in your work folder, and open from within your Jupyer Lab web environment.
+
+Here we create a tabular Parquet file, that only contains rows that contain the cell_id and the data values, no geometries. The file size is comparable with the original GeoTIFF file. We also created overviews (aggregations for each refinement level). This file will serve in the final step as data source for the Pydggsapi server.

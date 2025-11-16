@@ -1,0 +1,57 @@
+name: geopython2025
+channels:
+  - conda-forge
+dependencies:
+  - pyopenssl>=20.0.1
+  - python=3.11
+  - requests>=2.25.1
+  - cartopy
+  - contextily
+  - descartes
+  - fiona
+  - folium
+  - gdal
+  - dggrid
+  - geographiclib
+  - datashader
+  - dask
+  - geojson
+  - geopandas
+  - geos
+  - geoviews
+  - holoviews
+  - hvplot
+  #- leafmap
+  - ipykernel
+  - ipython
+  #- ipyleaflet
+  - ipywidgets
+  - jupyter
+  - jupyterlab
+  - jupyter-cache
+  #- jupyter_contrib_nbextensions
+  - lonboard
+  - matplotlib
+  - numpy
+  - owslib
+  - pandas
+  - pillow
+  - proj
+  - pydeck
+  - pyproj
+  - pyogrio
+  - pyarrow
+  - rasterio
+  - rasterstats
+  - shapely
+  - tqdm
+  - xarray
+  - rioxarray
+  - zarr
+  - mapclassify
+  - h3-py
+  - wheel
+  - setuptools
+  - pip
+
+

@@ -28,13 +28,13 @@ book:
         - pysetup/05_setup_jupyter.qmd
     - part: "DGGRID and dggrid4py"
       chapters:
-        - dggrid/dggrid_intro.qmd
-        - data_conversion/data_conversion.qmd
+        - 06_dggrid/06_dggrid_intro.qmd
+        - 07_data_conversion/07_data_conversion.qmd
         # - dggrid_advanced/dggrid_advanced.qmd
     
     - part: "Pydggsapi and OGC API - DGGS"
       chapters:
-        - pydggsapi/pydggsapi_intro.qmd
+        - 08_pydggsapi/08_pydggsapi_intro.qmd
         # - pydggsapi_advanced/pydggsapi_advanced.qmd
     - references/license.qmd
     - references/references.qmd

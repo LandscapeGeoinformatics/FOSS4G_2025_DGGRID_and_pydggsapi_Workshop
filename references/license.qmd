@@ -1,6 +1,10 @@
 # License
 
-<a href="https://landscapegeoinformatics.github.io/FOSS4G_2025_DGGRID_and_pydggsapi_Workshop/">Hands-on DGGS and OGC DGGS-API with DGGRID and pydggsapi Workshop</a> © 2025 by <a href="https://landscape-geoinformatics.ut.ee/">Alexander Kmoch, Wai Tik Chan, Iris Luik, Kajetan Marcin Chrapkiewicz, Evelyn Uuemaa</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+This DGGS and OGC DGGS-API with DGGRID and pydggsapi <a href="https://landscapegeoinformatics.github.io/FOSS4G_2025_DGGRID_and_pydggsapi_Workshop/">Workshop</a> © 2025 by Alexander Kmoch, Wai Tik Chan, Iris Luik, Kajetan Marcin Chrapkiewicz, and Evelyn Uuemaa of the <a href="https://landscape-geoinformatics.ut.ee/">Landscape Geoinformatics Lab</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+
+**However, several figures are specifically copyright protected, and shall not be copied, reproduced, or derivatives made of, without written consent from the authors. These are indicated in their captions.**
+
+Beyond these specifically marked figures, ...
 
 **You are free to:**
 

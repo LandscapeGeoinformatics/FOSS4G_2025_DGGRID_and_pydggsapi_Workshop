@@ -1,11 +1,20 @@
 # Preface {.unnumbered}
 
+## License
+
+These materials, if not stated otherwise, are licensed under the Creative Commons Attribution License 4.0 (CC-BY-4.0). However, several figures (stated in their captions) are specifically copyright protected, and shall not be copied, reproduced, or have derivatives made of, without written consent from the authors.
+
+For more info read the [license statement](references/license.html).
+
+## A global grid
+
 Imagine a **grid covering the entire globe** where every cell has a **unique ID that tells you both its location and size** (the latter is constant at a given resolution). That's essentially what a Discrete Global Grid System (DGGS) is—**a table of the Earth's surface**. This makes **spatial analysis as simple as database operations**.
 
 
 ![Transformation from a traditional projected coordinate system grid to a Discrete Global Grid System (DGGS); CC-BY-4.0 [-@dggrid4py_kmoch_2025]](files/figures/epsg_dggs.png)
 
 ## The problem with traditional approaches
+
 Traditional coordinate systems introduce distortions in area, shape, or distance. Hierarchical, zone-based DGGS framework reduces these geographic biases.
 
 ### Global Studies

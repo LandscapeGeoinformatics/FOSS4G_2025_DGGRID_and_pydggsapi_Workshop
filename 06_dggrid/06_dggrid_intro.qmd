@@ -1,16 +1,82 @@
-# Installation and use
+# 6. DGGRID and dggrid4py
 
 ## DGGRID
 
-
 [DGGRID](https://www.discreteglobalgrids.org/software/) is a free
 software program for creating and manipulating Discrete Global Grids
-created and maintained by Kevin Sahr. DGGRID version 8.42 was released 21. September 2025
+created and maintained by Kevin Sahr. DGGRID version 8.42 was released 21. September 2025.
 
 - [DGGRID Version 8.42 on GitHub](https://github.com/sahrk/DGGRID)
-- [DGGRID User Manual PDF](https://github.com/sahrk/DGGRID/blob/d08e10d761f7bedd72a253ab1057458f339de51e/dggridManualV81b.pdf)
-- [https://dggrid.readthedocs.io/latest/](https://dggrid.readthedocs.io/latest/dggrid_man_V841.html)
+- [DGGRID User Manual PDF](https://github.com/sahrk/DGGRID/blob/d08e10d761f7bedd72a253ab1057458f339de51e/dggridManualV81b.pdf) or [https://dggrid.readthedocs.io/latest/](https://dggrid.readthedocs.io/latest/dggrid_man_V841.html)
 
+DGGRID is packaged [on conda-forge](https://anaconda.org/conda-forge/dggrid) With the Micromamba approach the package should be included in the environment file. If you manage your won environment you could install like so:
+
+```bash
+micromamba install -c conda-forge dggrid
+```
+
+::: {.callout-tip}
+You can also compile it yourself and use a locally installed version. As a last resort, we have pre-compiled binaries available. However, these are not regularly updated and might not be available for all architectures. In the next section, the dggrid4py library provides a function to download such a precompiled binary for Windows (amd64), Linux (amd64 and aarch64), and Mac(arm64).
+::: 
+
+## DGGRID
+
+You could use DGGRID "manually". This involves crafting a so called `metafile` and placing required input files according as well (like for clipping or binning or address transformation).
+
+The source code distribution of DGGRID contains mnany [examples](https://github.com/sahrk/DGGRID/tree/master/examples). For example, to create a global hexagonal grid of type `ISEA7H` at refinement level 3 (resolution) a minimal metafile would contain the following lines:
+
+```bash
+# the filename should be metafile
+# specify the operation
+dggrid_operation GENERATE_GRID
+
+# specify the DGG
+dggs_type ISEA7H
+dggs_res_spec 3
+
+# control the generation
+clip_subset_type WHOLE_EARTH
+geodetic_densify 0.0
+
+# specify the output file name
+cell_output_type SHAPEFILE
+cell_output_file_name outputf_isea7h3
+densification 3
+precision 5
+```
+
+
+Then you would call dggrid with the file as parameter, like so:
+
+```bash
+dggrid metafile
+
+
+# And the output would be something like this:
+
+>>> ** executing DGGRID version 8.42 with GDAL version 3110400 **
+>>> type sizes: big int: 64 bits / big double: 64 bits
+>>> 
+>>> ** using meta file metafile...
+>>> * parameter values:
+>>> dggrid_operation GENERATE_GRID (user set)
+>>> 
+>>> ... lots output
+>>> 
+>>> ** grid generation complete **
+>>> * generated 3,432 cells
+
+```
+
+In the same directory you would then find the generated files for `outputf_isea7h3.shp` including the shapefile sidecar files.
+
+```bash
+ls outputf_isea7h3*
+
+>>> outputf_isea7h3.dbf  outputf_isea7h3.prj  outputf_isea7h3.shp  outputf_isea7h3.shx
+```
+
+But for workflows this would be too cumbersome, so we want to automate this interaction with `DGGRID` via `dggrid4py`.
 
 ## dggrid4py
 
@@ -18,11 +84,67 @@ dggrid4py is a Python library to run highlevel functions of DGGRID, it is a wrap
 
 [https://dggrid4py.readthedocs.io/en/latest/](https://dggrid4py.readthedocs.io/en/latest/)
 
+To work with latest versions of DGGRID is also recommended to use the latest version of dggrid4py. dggrid4py is only available from [PyPI](https://pypi.org/project/dggrid4py/). It can also be installed from the [GitHub repository](https://github.com/allixender/dggrid4py) directly:
+
+```bash
+pip install "dggrid4py>=0.5.2"
+```
+
+
+If you feel experimental, it is possible to install from the latest commits from GitHub:
+
+```bash
+pip install git+https://github.com/allixender/dggrid4py.git
+```
+
+You can check the version, when importing dggrid4py in Python:
+
+```python
+import dggrid4py
+
+dggrid4py.__version__
+
+# and it would print something like this
+>>> 0.5.1-dev
+```
+
+For the use of DGGRID in dggrid4py, you need to know the path to the exectible DGRID file. In most shells you can run:
+
+```bash
+which dggrid
+
+# and it will show the path to an available installed version (in my case):
+>>> /Users/akmoch/micromamba/envs/dggrid/bin/dggrid
+```
+
+Within Python you can do that as well:
+
+```python
+import shutil
+
+shutil.which("dggrid")
+
+>>> '/Users/akmoch/micromamba/envs/dggrid/bin/dggrid'
+```
+
+::: {.callout-warning}
+You will need the path to the executable later on!
+::: 
+
+### Usage
+
 The main entry point are two class instances, `DGGRIDv7` (simpler) and `DGGRIDv8` (more detailed configuration possible).
 
 `DGGRIDv7` is the "classic" dggrid4py interface, easier to use, and also supports running DGGRID tool in version 8.
 
 `DGGRIDv8` is an effort to make the newer features in DGGRID accessible, and be more future-proof for the planned DGGRID v9.
+
+
+::: {.callout-tip}
+You will need the path to the DGGRID executable now! Exemplary, in my case:
+
+Ideally, set a variable: `dggrid_exec = '/Users/akmoch/micromamba/envs/dggrid/bin/dggrid'`
+::: 
 
 Usage examples:
 
@@ -33,9 +155,12 @@ import shapely
 
 from dggrid4py import DGGRIDv7
 
+# just checking if you remembered the DGGRID executable path :-)
+print(dggrid_exec)
+
 # create an inital instance that knows where the dggrid tool lives, 
 # configure temp workspace and log/stdout output
-dggrid_instance = DGGRIDv7(executable='<path_to>/dggrid',
+dggrid_instance = DGGRIDv7(executable=dggrid_exec,
                             working_dir='.',
                             capture_logs=False,
                             silent=False,
@@ -45,6 +170,28 @@ dggrid_instance = DGGRIDv7(executable='<path_to>/dggrid',
 # global ISEA4T grid at resolution 5 into GeoDataFrame to Shapefile
 gdf1 = dggrid_instance.grid_cell_polygons_for_extent('ISEA4T', 5)
 print(gdf1.head())
+```
+
+::: {.callout-warning}
+DGGRID does not always set the coordinate system on the produced output files.
+
+We can manually set (force) the CRS to WGS84/EPSG:4326. This is in general not recommended at all when working spatial data. You should only do that if you know what you are doing.
+
+This is a specific situation with DGGRID output, we assume the data to be lat/lon. (later more on that...)
+::: 
+
+print(gdf1.crs)
+
+gdf1.crs = 4326
+
+print(gdf1.crs)
+```
+
+Then we continue...
+
+```python
+print(gdf1.head())
+
 gdf1.to_file('isea4t_5.shp')
 
 gdf_centroids = dggrid_instance.grid_cell_centroids_for_extent(dggs_type='ISEA7H',
@@ -52,24 +199,35 @@ gdf_centroids = dggrid_instance.grid_cell_centroids_for_extent(dggs_type='ISEA7H
                                 mixed_aperture_level=None,
                                 clip_geom=None)
 print(gdf_centroids.head())
+```
 
-# clip extent
-clip_bound = shapely.geometry.box(20.2,57.00, 28.4,60.0 )
+DGGRID has built-in functionality to show statistics for its different DGGS.
 
-# ISEA7H grid at resolution 9, for extent of provided WGS84 rectangle
-# into GeoDataFrame to Shapefile
-gdf3 = dggrid_instance.grid_cell_polygons_for_extent('ISEA7H', 9, clip_geom=est_bound)
-print(gdf3.head())
-gdf3.to_file('grids/est_shape_isea7h_9.shp')
-
+```python
 # generate cell and areal statistics for a ISEA7H grids from
 # resolution 0 to 8 (return a pandas DataFrame)
 df1 = dggrid_instance.grid_stats_table('ISEA7H', 8)
 print(df1.head(8))
 df1.to_csv('isea7h_8_stats.csv', index=False)
+```
+
+You can also create the cells only within an area. For that you need to provide a `shapely Polygon`:
+
+```python
+# clip extent
+clip_bound = shapely.geometry.box(20.2,57.00, 28.4,60.0 )
+
+# ISEA7H grid at resolution 9, for extent of provided WGS84 rectangle
+# into GeoDataFrame to Shapefile
+gdf3 = dggrid_instance.grid_cell_polygons_for_extent('ISEA7H', 9, clip_geom=clip_bound)
+print(gdf3.head())
+gdf3.to_file('grids/est_shape_isea7h_9.shp')
 
 # generate the DGGS grid cells that would cover a GeoDataFrame of points,
 # return Polygons with cell IDs as GeoDataFrame
+# we could reuse the previous data
+geodf_points_wgs84 = gdf3.centroid
+
 gdf4 = dggrid_instance.cells_for_geo_points(geodf_points_wgs84, False, 'ISEA7H', 5)
 print(gdf4.head())
 gdf4.to_file('polycells_from_points_isea7h_5.shp')
@@ -83,20 +241,11 @@ gdf5 = dggrid_instance.cells_for_geo_points(geodf_points_wgs84=geodf_points_wgs8
 print(gdf5.head())
 gdf5.to_file('geopoint_cellids_from_points_isea4h_8.shp')
 
-# generate DGGS grid cell polygons based on 'cell_id_list'
-# (a list or np.array of provided cell_ids)
-gdf6 = dggrid_instance.grid_cell_polygons_from_cellids(cell_id_list=[1, 4, 8], 'ISEA7H', 5)
-print(gdf6.head())
-gdf6.to_file('from_seqnums_isea7h_5.shp')
-
-# v0.2.6 API update split at dateline for cartesian GIS tools
-# might be better to consider `wrap_dateline` parameter with DGGRIDv8
-# or use an additional library like `antimeridian`
-gdf7 = dggrid_instance.grid_cell_polygons_for_extent('ISEA7H', 3, split_dateline=True)
-gdf7.to_file('global_isea7h_3_interrupted.shp')
-
-
 ```
+
+::: {.callout-tip}
+If you get an error regarding `PROJ`, along the lines of *UserWarning: pyproj unable to set PROJ database path*, consider setting the `PROJ_DATA` path manually. See: [5. Jupyter > Proj database location info](../pysetup/05_setup_jupyter.html#proj-database-location-info)
+::: 
 
 ## IGEO7 Usage examples
 
@@ -108,6 +257,9 @@ We present **IGEO7**, a novel pure aperture 7 hexagonal DGGS, and **Z7**, its as
 
 IGEO7 and Z7 are implemented in the open-source software DGGRID. We also present a use case for on-demand suitability modeling to demonstrate a practical application of this new DGGS.
 
+::: {.callout-tip}
+We still use the DGGRIDv7 instance we created above.
+::: 
 
 ```python
 gdf_z1 = dggrid_instance.grid_cell_polygons_for_extent('IGEO7',
@@ -158,7 +310,7 @@ In order to have DGGH and ZIRS compliant with the OGC DGGS standard,
 we aim to enable a few minor adjustments to IGEO7 through the use of dggrid4py:
 
 - to apply authalic conversion to the WGS84 ellipsoid instead of the spherical approximation, using `pygeodesy` (based off geographiclib), see :mod:`dggrid4py.auxlat`
-- a rotation of the base icosahedron of 0.05 degrees to align the vertices better with water bodies through a specific parameter in DGGRID. Example: TODO
+- a rotation of the base icosahedron by 0.05 degrees (from the default 11.25 to 11.20) to align the vertices better with water bodies through a specific parameter `dggs_vert0_lon` in DGGRID.
 
 In practice this means that IGEO7 as described in the original publication is not the same as the ellipsoid-adjusted IGEO7 version, though both can be generated through dggrid4py.
 
@@ -177,7 +329,7 @@ clip_bound_auth = clip_bound = shapely.geometry.box(25.2,
                             27.3,
                             auxlat.geodetic_to_authalic(59.2))
 
-dggrid_instance_v8 = DGGRIDv8(executable='<path_to>/dggrid', working_dir='.',
+dggrid_instance_v8 = DGGRIDv8(executable=dggrid_exec, working_dir='.',
                         capture_logs=False, silent=False,
                         tmp_geo_out_legacy=False, debug=False)
 

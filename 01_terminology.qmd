@@ -33,7 +33,7 @@ The process of dividing a zone into a set of child zones. There are some conside
 :::
 
 
-![Refinement of a triangular grid. Question - what's the refinement ratio? Figures: CC-BY-4.0 [-@Kmoch03072022]](files/figures/4aperture_triangles.png){width=50%}
+![Refinement of a triangular grid. Question - what's the refinement ratio? Figures: Copyright &copy; [Landscape Geoinformatics Lab](https://landscape-geoinformatics.ut.ee/)](files/figures/4aperture_triangles.png){width=50%}
 
 
 ## Refinement ratio (aperture)
@@ -42,7 +42,7 @@ Refinement ratio (also known as aperture) describes how many child zones are cre
 In hexagonal grids, typical refinement ratios are 3, 4, and 7, with 7 being the most effective, as it divides each parent hexagon into 7 
 smaller hexagons, maintaining an almost congruent (same shape and size) parent-child relationship.
 
-![Different refinement ratios on hexagonal grid; Figures: CC-BY-4.0 [-@agile-giss-6-32-2025]](files/figures/refinement_ratios.png)
+![Different refinement ratios on hexagonal grid; Figures: Copyright &copy; [Landscape Geoinformatics Lab](https://landscape-geoinformatics.ut.ee/)](files/figures/refinement_ratios.png)
 
 
 ## Refinement level (resolution)
@@ -50,4 +50,4 @@ smaller hexagons, maintaining an almost congruent (same shape and size) parent-c
 Refinement level indicates how many times the faces of the base polyhedron have been subdivided, with higher levels representing finer grid resolutions.
 Lower refinement level refers to larger zones suitable for global-scale analysis, while higher refinement level refers to smaller zones, making it useful for local studies.
 
-![Different refinement levels of the hexagonal grid; Figures: CC-BY-4.0 [-@agile-giss-6-32-2025]](files/figures/refinement_levels_estonia.png)
+![Different refinement levels of the hexagonal grid; Figures: Copyright &copy; [Landscape Geoinformatics Lab](https://landscape-geoinformatics.ut.ee/)](files/figures/refinement_levels_estonia.png)

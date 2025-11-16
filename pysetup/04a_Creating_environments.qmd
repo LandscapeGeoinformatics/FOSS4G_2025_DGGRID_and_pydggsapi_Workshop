@@ -84,7 +84,7 @@ In the Windows File Explorer, go via `this PC`, `c:\Users` to
 
 ::: {.callout-tip}
 Now, please download the prepared
-[environment.yml](../files/data/environment.yml) file and save it to
+[environment.yml](environment.yml) file and save it to
 your newly created working folder. You might need to \"Right-click\" and
 use \"Save as\".
 :::

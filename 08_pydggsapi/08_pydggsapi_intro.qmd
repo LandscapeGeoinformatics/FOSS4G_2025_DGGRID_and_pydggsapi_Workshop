@@ -1,0 +1,117 @@
+# 8. Pydggsapi - DGGS API service
+
+[https://pydggsapi.readthedocs.io/en/latest/](https://pydggsapi.readthedocs.io/en/latest/)
+
+## Checkpoints from the previous sections
+
+- the `micromamba` (Python) environment is created and activated
+- Jupyter is configured and running
+- the DGGS data source is pre-processed, has overviews aggregated, and is ready in the filesystem (or object storage)
+
+## Installation
+
+We install with pip directly from Github.
+
+Start a second terminal environment, the same way you prepared the previous steps:
+
+- open shell
+- activate Python environment
+
+Now install `pydggsapi` directly from the Git repository:
+
+
+```bash
+pip install git+https://github.com/LandscapeGeoinformatics/pydggsapi.git
+```
+
+## Configuration file
+
+Reference:[ https://pydggsapi.readthedocs.io/en/latest/tinydb_configuration/index.html]( https://pydggsapi.readthedocs.io/en/latest/tinydb_configuration/index.html)
+
+Save the file in your working directory, e.g. as file name: `dggs_api_config.json` 
+
+```json
+{
+  "collections": {
+    "2": {
+      "dem_parquet_in_igeo7": {
+        "title": "DEM in parquet format",
+        "description": "DEM using IGEO7 DGGRS for the Hytruck project. Datasource stored in a parquet file.",
+        "collection_provider": {
+          "providerId": "parquet",
+          "dggrsId": "igeo7",
+          "min_refinement_level": 1,
+          "max_refinement_level": 13,
+          "datasource_id": "dem_parquet_in_igeo7"
+        }
+      }
+    },
+  },
+  "dggrs": {
+    "1": {
+      "igeo7": {
+        "title": "IGEO7 DGGRS with z7string",
+        "description": "IGEO7, a novel pure aperture 7 hexagonal DGGS, and Z7, its associated hierarchical integer indexing system",
+        "crs": "wgs84",
+        "shapeType": "hexagon",
+        "definition_link": "https://agile-giss.copernicus.org/articles/6/32/2025/",
+        "defaultDepth": 1,
+        "classname": "igeo7_dggrs_provider.IGEO7Provider"
+      }
+    }
+  },
+  "collection_providers": {
+    "1": {
+      "parquet": {
+        "classname": "parquet_collection_provider.ParquetCollectionProvider",
+          "datasources": {
+            "dem_parquet_in_igeo7": {
+              "filepath": "<local file path or path of a cloud bucket>",
+			  "id_col": "cell_ids",
+			  "data_cols": ["*"]
+            }
+			
+          }
+        }
+      }
+  }
+}
+```
+
+## Starting the service
+
+We need to set two specific enviroment variables:
+
+In bash shell you would set these like so
+
+```bash
+dggs_api_config=<full path to config json file from above>
+DGGRID_PATH=<full path to dggrid executable>
+
+export dggs_api_config
+export DGGRID_PATH
+```
+
+In Fish you'd set `set -x DGGRID_PATH <full path to dggrid executable>`.
+
+In Powershell:
+
+```Powershell
+$env:dggs_api_config = '<full path to config json file from above>' 
+$env:DGGRID_PATH = '<full path to dggrid executable>' 
+```
+
+You can also create an `.env` file in your working directory. Change the environment variables according to your local environment setup. Please refer to the [configuration](https://pydggsapi.readthedocs.io/en/latest/tinydb_configuration/index.html) for more details.
+
+Then start the pydggsapi service in the same folder:
+
+```bash
+pydggsapi
+```
+
+The server should now listen on [http://127.0.0.1:8000](http://127.0.0.1:8000)
+## API exploration
+
+- open the OpenAPI / Swagger docs under [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+- demo notebook: [https://pydggsapi.readthedocs.io/en/latest/example_notebook/Endpoints_Examples.html](https://pydggsapi.readthedocs.io/en/latest/example_notebook/Endpoints_Examples.html)

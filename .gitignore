@@ -424,3 +424,4 @@ wheels/
 
 **/*.quarto_ipynb
 .DS_Store
+misc/

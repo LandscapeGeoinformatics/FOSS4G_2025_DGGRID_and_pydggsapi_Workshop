@@ -54,6 +54,40 @@ Under Mac/Linux you might have to press **Ctrl+D** to exit.
 (geopython2025) >>> exit()
 ```
 
+## Proj database location info
+
+::: {.callout-warning}
+Sometimes it happens that the Python/conda environment fails to configure the `PROJ` environment correctly. This can happen when mixing geospatial library installations from PyPI and conda-forge, or conflicting environment variables from other software, like Postgres/PostGIS.
+::: 
+
+A fairly robust way to keep working is to manually setting at least the environment variable `PROJ_DATA`. To do so, you'd start a Python REPL session (or in a notebook) and query the `pyproj.datadir.get_data_dir()`. Then, in all future sessions you set this path manually before loading any other geospatial libraries:
+
+```python
+import os
+import pyproj
+
+# the confirming error appears [UserWarning: pyproj unable to set PROJ database path]
+>>> /Users/akmoch/micromamba/envs/dggrid/lib/python3.10/site-packages/pyproj/network.py:59: UserWarning: pyproj unable to set PROJ database path.
+
+# query the the path from a function
+pyproj.datadir.get_data_dir()
+>>> '/Users/akmoch/micromamba/envs/dggrid/lib/python3.10/site-packages/pyproj/proj_dir/share/proj'
+```
+
+Then use this path to set the environment variable manually at the begin of new Python sessions/script:
+
+```python
+import os
+
+os.environ["PROJ_DATA"] = '/Users/akmoch/micromamba/envs/dggrid/lib/python3.10/site-packages/pyproj/proj_dir/share/proj'
+```
+
+::: {.callout-tip}
+Your path my vary, adjust based on your environment.
+::: 
+
+
+
 ## Install IPykernel and start up Jupyter Notebook
 
 The Jupyter Notebook server is an open-source web application that
