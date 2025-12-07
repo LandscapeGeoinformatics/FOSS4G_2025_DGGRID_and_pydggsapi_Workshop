@@ -1,23 +1,33 @@
 cff-version: 1.2.0
-message: "If you use these materials, please cite it as below."
+message: "If you use these materials, please cite them as below."
 authors:
-- family-names: "Chan"
-  given-names: "Wai Tik"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Luik"
-  given-names: "Iris"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Chrapkiewicz"
-  given-names: "Kajetan Marcin"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Kmoch"
-  given-names: "Alexander"
-  orcid: "https://orcid.org/0000-0003-4386-4450"
-- family-names: "Uuemaa"
-  given-names: "Evelyn"
-  orcid: "https://orcid.org/0000-0002-0782-6740"
-title: "Landscape Geoinformatics EGU 2021 workshop materials"
+- affiliation: University of Tartu
+  family-names: Kmoch
+  given-names: Alexander
+  orcid: 0000-0003-4386-4450
+- affiliation: University of Tartu
+  family-names: Chan
+  given-names: Wai Tik
+  orcid: 0009-0005-3779-139X
+- affiliation: University of Tartu
+  family-names: Luik
+  given-names: Iris
+- affiliation: University of Tartu
+  family-names: Chrapkiewicz
+  given-names: Kajetan
+  orcid: 0000-0001-6949-9741
+- affiliation: University of Tartu
+  family-names: Uuemaa
+  given-names: Evelyn
+  orcid: 0000-0002-0782-6740
+title: FOSS4G Auckland DGGS and pydggsapi workshop materials
 version: 0.0.3
-doi: 10.5281/zenodo.xxx
-date-released: 2025-11-17
+date-released: '2025-11-17'
+doi: 10.5281/zenodo.17844019
+keywords:
+- dggs
+- geospatial
+- geoinformatics
+license:
+- cc-by-4.0
 url: "https://landscapegeoinformatics.github.io/FOSS4G_2025_DGGRID_and_pydggsapi_Workshop/"
