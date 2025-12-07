@@ -1,5 +1,8 @@
 # FOSS4G 2025: Hands-on DGGS and OGC DGGS-API with DGGRID and pydggsapi Workshop
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17844019.svg)](https://doi.org/10.5281/zenodo.17844019)
+
+
 https://2025.foss4g.org/program/schedule#event-4337-hands-on-dggs-and-ogc-dggs-api-with-dggrid-and-pydggsapi-workshop
 
 Discrete Global Grid Systems (DGGS) are getting more attention, and with the new OGC API - DGGS standard released, it's a good time for the open-source community to get practical, hands-on experience. This workshop bridges the gap between the theory of DGGS and a working implementation.
